@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: lugares-seguros-back
+    name: lugares_seguros3
     env: docker
     autoDeploy: false
     plan: free
