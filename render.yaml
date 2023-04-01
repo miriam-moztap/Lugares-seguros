@@ -8,8 +8,8 @@ services:
     envVars:
       - key: ENV
         sync: False
-      - key: DJANGO_SECRET_KEY
-        sync: False
+      #      - key: DJANGO_SECRET_KEY
+      #        sync: False
       - key: DJANGO_ALLOWED_HOSTS
         sync: False
       - key: CORS_ALLOW_ALL_ORIGINS
