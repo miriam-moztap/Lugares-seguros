@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /app/core
+cd /app/api
 
 python manage.py migrate
 
