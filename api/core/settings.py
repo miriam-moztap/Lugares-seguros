@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # local apps:
 ]
 
 INSTALLED_APPS += [
@@ -56,6 +57,7 @@ INSTALLED_APPS += [
 
     # Local apps:
     'apps.initial',
+    'apps.places',
 ]
 
 MIDDLEWARE = [
@@ -99,16 +101,35 @@ DB_PASSWD = config('POSTGRES_PASSWORD', default='')
 DB_HOST = config('POSTGRES_HOST', default='127.0.0.1')
 DB_PORT = config('POSTGRES_PORT', cast=int, default=5432)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': DB_NAME,
+#        'USER': DB_USER,
+#        'PASSWORD': DB_PASSWD,
+#        'HOST': DB_HOST,
+#        'PORT': DB_PORT,
+#    }
+#}
+
+if DB_NAME !="":
+    DATABASES = { 
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_NAME,
+            'USER': DB_USER,
+            'PASSWORD': DB_PASSWD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+        },
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
