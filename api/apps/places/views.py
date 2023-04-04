@@ -31,7 +31,7 @@ class PlaceAPIView(APIView):
         serializer = PlaceSerializers(places, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class PlacegetView(APIView):
+class PlaceAPIGetUpdateDeleteView(APIView):
 
     def get(self, request, id):
         place = Place.objects.filter(id=id).first()
@@ -41,9 +41,6 @@ class PlacegetView(APIView):
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class PlaceAPIUpdateDeleteView(APIView):
-    
 
     def patch(self, request, id):
         place = Place.objects.filter(id=id).first()
