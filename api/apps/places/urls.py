@@ -1,9 +1,10 @@
 from django.urls import URLPattern, path
-from .views import PlaceAPIView, PlaceAPIUpdateDeleteView, PlaceGetAPIView
+from .views import PlaceAPIView, PlaceAPIGetUpdateDeleteView
+
 
 
 urlpatterns = [
-    path('', PlaceAPIView.as_view()),    
-    path('<int:id>/', PlaceGetAPIView.as_view()),
-    path('<int:id>/', PlaceAPIUpdateDeleteView.as_view()),
+    path('', PlaceAPIView.as_view()),
+    path('<int:id>/', PlaceAPIGetUpdateDeleteView.as_view()),
 ]
+
