@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Comment
 from.serializers import CommentSerializers
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -13,3 +14,21 @@ class CommentView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CommentSingleView(APIView):
+      
+      def patch(self, request, pk):
+           Comment = Comment.objects.filter(pk=pk).first()
+
+           if Comment is None:
+                return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+           
+           serializer = CommentSerializers(Comment, data=request.data, partial=True)
+           serializer.is_valid(raise_exception=True)
+           serializer.save()
+           return Response(serializer.data, status=status.HTTP_200_OK)
+
+      def delete(self, request, pk):
+           place = get_object_or_404(Comment, pk=pk)
+           place.delete()
+           return Response('Comentario eliminado', status=status.HTTP_204_NO_CONTENT)

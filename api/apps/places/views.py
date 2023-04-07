@@ -6,7 +6,8 @@ from rest_framework import status
 from .models import Place
 from .serializers import PlaceSerializers
 from .models import Place 
-from .serializers import PlaceSerializers
+from .serializers import PlaceSerializers, PlaceListCommentSerializer
+
 
 # Create your views here.
 
@@ -37,10 +38,9 @@ class PlaceAPIGetUpdateDeleteView(APIView):
         place = Place.objects.filter(id=id).first()
         if place is None:
             return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = PlaceSerializers(place, data=request.data, partial=True)
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = PlaceListCommentSerializer(place)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
     def patch(self, request, id):
         place = Place.objects.filter(id=id).first()
