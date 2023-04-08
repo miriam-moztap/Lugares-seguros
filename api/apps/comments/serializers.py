@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from .models import Comment
 
-
 class CommentSerializers(serializers.ModelSerializer):
-
     class Meta:
         model = Comment
         fields = (
@@ -14,13 +12,12 @@ class CommentSerializers(serializers.ModelSerializer):
         )
 
     def to_representation(self, instance):
-        
-        return { 
+        return {
             'id': instance.id,
             'place': {
                 'id': instance.place.id,
                 'name': instance.place.name
-                },
+            },
             'comment': instance.comment,
-            'created': instance.created 
+            'created': instance.created
         }
