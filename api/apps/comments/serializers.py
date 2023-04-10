@@ -6,6 +6,7 @@ class CommentSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
+        #fields = '__all__'
         fields = (
             'id',
             'place',
@@ -24,3 +25,11 @@ class CommentSerializers(serializers.ModelSerializer):
             'comment': instance.comment,
             'created': instance.created 
         }
+class CommentPlaceListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = (
+            'id',
+            'comment',
+            'created'
+        )
