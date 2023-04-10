@@ -31,7 +31,7 @@ class CommentPlaceListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = (
-            'id'
-            'comment'
-            'created'
+            'id',
+            'comment',
+            'created',
         )

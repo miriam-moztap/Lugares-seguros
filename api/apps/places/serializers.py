@@ -22,9 +22,9 @@ class PlaceListCommentSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'comment',
-            )
+        )
         
 
     def get_comment(self, obj):
-        select_commet = Comment.objects.filter(place__id = obj.id)
-        return CommentPlaceListSerializer(select_commet, many=True).data
+        selected_comment = Comment.objects.filter(place__id = obj.id)
+        return CommentPlaceListSerializer(selected_comment, many=True).data

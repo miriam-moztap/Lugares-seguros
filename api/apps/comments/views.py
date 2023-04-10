@@ -18,12 +18,11 @@ class CommentView(APIView):
 class CommentSingleView(APIView):
       
       def patch(self, request, pk):
-           Comment = Comment.objects.filter(pk=pk).first()
-
-           if Comment is None:
-                return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
+           comment = Comment.objects.filter(pk=pk).first()
+           if comment is None:
+               return Response({'error': 'Bad request.'}, status=status.HTTP_400_BAD_REQUEST)
            
-           serializer = CommentSerializers(Comment, data=request.data, partial=True)
+           serializer = CommentSerializers(comment, data=request.data, partial=True)
            serializer.is_valid(raise_exception=True)
            serializer.save()
            return Response(serializer.data, status=status.HTTP_200_OK)
