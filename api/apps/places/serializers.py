@@ -25,5 +25,5 @@ class PlaceListCommentSerializer(serializers.ModelSerializer):
         ) #este campo de fields se refiere a los datos del comentario que se van a mostrar cuando se llame un lugar
 
     def get_comment(self, obj):
-        selected_comment = Comment.objects.filter(place__id = obj.id)
+        selected_comment = Comment.objects.filter(place_id = obj.id)
         return CommentPlaceListSerializer(selected_comment, many=True).data

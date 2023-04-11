@@ -58,5 +58,5 @@ class PlaceAPIGetUpdateDeleteView(APIView):
         if place is None:
             return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
         place.delete()
-        return Response({'mesage': 'lugar eliminado satisfactoriamente'}, status=status.HTTP_200_OK)
+        return Response({'mensage': 'lugar eliminado satisfactoriamente'}, status=status.HTTP_200_OK)
     
