@@ -7,12 +7,13 @@ from .models import Place
 from .serializers import PlaceSerializers
 from .models import Place 
 from .serializers import PlaceSerializers
+from .serializers import PlaceListCommentSerializer
 
 # Create your views here.
 
 class PlaceAPIView(APIView):
 
-    parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, FormParser) #este código es para cargar la imagen
 
     def post(self, request):
         print(request.data)
@@ -32,15 +33,14 @@ class PlaceAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class PlaceAPIGetUpdateDeleteView(APIView):
-
+    
     def get(self, request, id):
         place = Place.objects.filter(id=id).first()
         if place is None:
             return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        serializer = PlaceSerializers(place, data=request.data, partial=True)
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = PlaceListCommentSerializer(place) #(data=request.data, partial=True) esto no se pone porque no es adquí donde se edita el lugar jeje
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
     def patch(self, request, id):
         place = Place.objects.filter(id=id).first()
