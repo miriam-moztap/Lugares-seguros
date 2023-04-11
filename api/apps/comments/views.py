@@ -28,4 +28,4 @@ class CommentSingleView(APIView):
     def delete(self, request, pk):
         place = get_object_or_404(Comment, pk=pk)
         place.delete()
-        return Response('comenario eliminado', status=status.HTTP_204_NO_CONTENT)
+        return Response({'comentario':'eliminado'}, status=status.HTTP_204_NO_CONTENT)
