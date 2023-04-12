@@ -18,11 +18,7 @@ class PlaceListCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = (
-            'id',
-            'name',
-            'comment',
-        ) #este campo de fields se refiere a los datos del comentario que se van a mostrar cuando se llame un lugar
+        fields = '__all__' #este campo de fields se refiere a los datos del comentario que se van a mostrar cuando se llame un lugar
 
     def get_comment(self, obj):
         selected_comment = Comment.objects.filter(place_id = obj.id)
