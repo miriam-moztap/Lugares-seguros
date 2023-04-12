@@ -28,11 +28,7 @@ class CommentSingleView(APIView):
     def delete(self, request, pk):
         place = get_object_or_404(Comment, pk=pk)
         place.delete()
-        return Response({'comentario':'eliminado'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'mensaje':'comentario eliminado satisfactoriamente'}, status=status.HTTP_204_NO_CONTENT)
 
-        place = Place.objects.filter(id=id).filter()
-        if place is None:
-            return Response({'error': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
-        place.delete()
-        return Response({'mensage': 'lugar eliminado satisfactoriamente'}, status=status.HTTP_200_OK)
+ 
 
