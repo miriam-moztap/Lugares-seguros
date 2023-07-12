@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # local apps:
 ]
 
 INSTALLED_APPS += [
@@ -56,6 +57,8 @@ INSTALLED_APPS += [
 
     # Local apps:
     'apps.initial',
+    'apps.places',
+    'apps.comments',
 ]
 
 MIDDLEWARE = [
@@ -93,22 +96,41 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DB_NAME = config('POSTGRES_DB', default='')
-DB_USER = config('POSTGRES_USER', default='')
-DB_PASSWD = config('POSTGRES_PASSWORD', default='')
-DB_HOST = config('POSTGRES_HOST', default='127.0.0.1')
-DB_PORT = config('POSTGRES_PORT', cast=int, default=5432)
+DB_NAME = config('DB_NAME', default='')
+DB_USER = config('DB_USER', default='')
+DB_PASSWD = config('DB_PASSWD', default='')
+DB_HOST = config('DB_HOST', default='127.0.0.1')
+DB_PORT = config('DB_PORT', cast=int, default=5432)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': DB_NAME,
+#        'USER': DB_USER,
+#        'PASSWORD': DB_PASSWD,
+#        'HOST': DB_HOST,
+#        'PORT': DB_PORT,
+#    }
+#}
+
+if DB_NAME !="":
+    DATABASES = { 
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_NAME,
+            'USER': DB_USER,
+            'PASSWORD': DB_PASSWD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+        },
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
